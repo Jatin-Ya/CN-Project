@@ -14,8 +14,8 @@ export class MyRoom extends Room<MyRoomState> {
       // vehicle.speed = message.speed || vehicle.speed;
     });
 
-    // this.setSimulationInterval(() => this.state.vehicles.forEach(vehicle => {
-      // vehicle.x += vehicle.speed;
+    this.setSimulationInterval(() => this.state.vehicles.forEach(vehicle => {
+      vehicle.speed += 1;
       // vehicle.y += vehicle.speed;
       // get the vehicles that are in close proximity to this vehicle and update their speed to coordinate traffic
     //   let speed = vehicle.speed;
@@ -33,7 +33,7 @@ export class MyRoom extends Room<MyRoomState> {
     //       // update the speed of the vehicle to avoid collision
     //     });
     //   }
-    // }), 1000);
+    }), 1000);
 
   }
 
@@ -43,7 +43,7 @@ export class MyRoom extends Room<MyRoomState> {
     this.state.vehicles.get(client.sessionId).id = client.sessionId;
     // this.state.vehicles.get(client.sessionId).x = Math.floor(Math.random() * 800);
     // this.state.vehicles.get(client.sessionId).y = Math.floor(Math.random() * 600);
-    // this.state.vehicles.get(client.sessionId).speed = 1;
+    this.state.vehicles.get(client.sessionId).speed = 1;
   }
 
   onLeave (client: Client, consented: boolean) {
