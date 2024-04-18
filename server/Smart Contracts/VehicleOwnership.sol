@@ -33,11 +33,8 @@ contract VehicleOwnership is ERC1155 {
         _currentTokenId = 1;
     }
 
-    function generateRandomHash(address ownr) internal pure returns (bytes32) {
-        bytes32 addrHash = keccak256(abi.encodePacked(uint160(ownr))); // Get the hash of the previous block
-        // bytes32 timestampHash = keccak256(abi.encode(block.timestamp)); // Hash the block timestamp
-        // bytes32 combinedHash = keccak256(abi.encodePacked(blockHash, timestampHash)); // Combine both hashes
-        return addrHash;
+    function generateRandomHash(address _address) internal pure returns (bytes32) {
+        return keccak256(abi.encodePacked(_address));
     }
 
     modifier onlyOwner() {
@@ -79,7 +76,7 @@ contract VehicleOwnership is ERC1155 {
         require(_owners[tokenId] == from, "Sender does not own the token");
         safeTransferFrom(from, to, tokenId, amount, "");
         _owners[tokenId] = to; // Update the owner of the token
-        _verificationCodes[from] = generateRandomHash(from);
+        _verificationCodes[to] = generateRandomHash(to);
     }
 
     function getVerificationCode(
